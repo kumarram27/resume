@@ -1,0 +1,68 @@
+\documentclass{resume}
+\usepackage[left=0.4in,top=0.3in,right=0.4in,bottom=0.3in]{geometry}
+\newcommand{\tab}[1]{\hspace{.2667\textwidth}\rlap{#1}}
+\newcommand{\itab}[1]{\hspace{0em}\rlap{#1}}
+\name{Boppana Kumar Satya Sri Ram}
+\address{
++91 7671869918 \hspace{0.3cm}
+\href{mailto:kumar27.dev@gmail.com}{kumar27.dev@gmail.com} \hspace{0.3cm}
+\href{https://kumarram27.github.io}{Portfolio} \hspace{0.3cm}
+\href{https://github.com/kumarram27}{GitHub} \hspace{0.3cm}
+\href{https://www.linkedin.com/in/kumarsatyasriram}{LinkedIn}
+}
+\begin{document}
+%------------------------------------------------
+\begin{rSection}{SUMMARY}
+Software Development Engineer with 1+ years of full-time experience building production backend services, distributed systems, and real-time device infrastructure. Experienced in Python, FastAPI, Redis, Elasticsearch, REST APIs, event-driven architectures, and real-time streaming, with a focus on scalability, performance, observability, and production reliability.
+\end{rSection}
+%------------------------------------------------
+
+\begin{rSection}{SKILLS}
+\begin{tabular}{ @{} >{\bfseries}l @{\hspace{3ex}} l }
+Languages & Python, TypeScript, JavaScript, SQL \\
+CS Fundamentals & Data Structures, Algorithms, Object-Oriented Design, Distributed Systems \\
+Frameworks & FastAPI, React.js, Next.js \\
+Backend & REST APIs, Microservices, Event-Driven Architecture \\
+Databases & PostgreSQL, MySQL, MongoDB, Redis, Elasticsearch \\
+Tools & Git, GitLab, Docker, Kong Gateway \\
+\end{tabular}
+\end{rSection}
+%------------------------------------------------
+\begin{rSection}{EXPERIENCE}
+\item
+\textbf{FlintLab Inc.} \hfill (Jul 2025 - Present)
+\textit{Software Development Engineer & Founding Engineer}
+\begin{itemize}
+\itemsep -3pt
+\item Built backend services for a device testing platform supporting \textbf{100+ Android and 50+ iOS devices}, covering allocation, automation, streaming, recording, logging, and session lifecycle workflows.
+\item Developed Python/FastAPI services and REST APIs with Redis Pub/Sub for event-driven communication, supporting \textbf{20+ parallel test executions} across integration testing and production.
+\item Extended \textbf{ws-scrcpy} with recording and platform integrations to support \textbf{50+ concurrent Android streams} with sub-second latency; built iOS streaming, device interaction, and recording services.
+\item Built the Android logging pipeline using allocation-triggered ADB Logcat collection, Redis Pub/Sub, Fluent Bit, and Elasticsearch; reduced representative log volume from \textbf{~98K to ~20K lines} and implemented retention controls to prevent production disk-pressure issues.
+\item Configured \textbf{Nginx reverse proxy + HTTPS/SSL via Certbot} to route separate development and production environments through dedicated subdomains behind a single static IP; implemented IPA resigning workflows for iOS execution.
+\item Implemented Auth0 authentication, RBAC, and API gateway token validation across platform services.
+\end{itemize}
+
+\textbf{FlintLab Inc.} \hfill (Mar 2025 - Jun 2025)
+\textit{Software Development Engineer Intern}
+\begin{itemize}
+\itemsep -3pt
+\item Reduced redundant frontend API calls by \textbf{30\%} through state management and Redis caching; contributed to SPA migration that reduced observed routing time from \textbf{~300 ms to ~20 ms}.
+\item Migrated frontend API calls from \textbf{client-side to server-side execution} in Next.js, improving control over data access and reducing exposure of backend interactions to the client.
+\item Developed and integrated Appium-based automation workflows for \textbf{Android and iOS} devices, contributing to automated mobile application testing and device execution workflows.
+\end{itemize}
+
+%------------------------------------------------
+\begin{rSection}{PROJECTS}
+\item
+\textbf{MyGVP Browser Extension \& CLI} -- Built a Node.js browser extension and CLI used by 500+ students, processing 1,000+ academic result queries using MongoDB; distributed and versioned through the npm package ecosystem.
+\href{https://github.com/kumarram27/gvp}{GitHub}
+\end{rSection}
+
+\begin{rSection}{EDUCATION}
+\textbf{Gayatri Vidya Parishad College of Engineering (GVPCE)}, Visakhapatnam
+\hfill 2021 - 2025
+Bachelor of Technology in Computer Science and Technology
+\hfill CGPA: 8.0
+\end{rSection}
+%------------------------------------------------
+\end{document}
