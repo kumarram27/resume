@@ -3,11 +3,13 @@ name: Boppana Kumar Satya Sri Ram
 title: Software Engineer
 email: kumar27.dev@gmail.com
 phone: "+91 7671869918"
-website: https://kumarram27.github.io
-linkedin: https://www.linkedin.com/in/kumarsatyasriram
-github: https://github.com/kumarram27
-accent_color: "#2563eb"
-font: inter
+links:
+  - text: Portfolio
+    url: https://kumarram27.github.io
+  - text: GitHub
+    url: https://github.com/kumarram27
+  - text: LinkedIn
+    url: https://www.linkedin.com/in/kumarsatyasriram
 ---
 
 # Summary
@@ -51,9 +53,10 @@ Jan 2025 – Mar 2025
 
 # Projects
 
-## [MyGVP Browser Extension & CLI](https://github.com/kumarram27/gvp)
+## MyGVP Browser Extension & CLI
 **Tech:** Node.js, MongoDB, npm
 
+- GitHub: [Repository](https://github.com/kumarram27/gvp)
 - Designed and built a Node.js browser extension and CLI tool used by 500+ students to access academic results.
 - Processed 1,000+ academic result queries and distributed versioned releases through the npm ecosystem.
 

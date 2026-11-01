@@ -28,7 +28,7 @@ jobs:
         id: resume
         uses: kumarram27/resume-forge@main
         with:
-          resume_file: resume.md
+          resume_file: README.md
           output_dir: public
           template: modern
           accent_color: '#2563eb'
