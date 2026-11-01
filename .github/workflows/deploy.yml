@@ -19,24 +19,52 @@ jobs:
       - name: Checkout resume repository
         uses: actions/checkout@v5
 
-      - name: Compile LaTeX
-        uses: xu-cheng/latex-action@v4
-        with:
-          root_file: resume.tex
-          latexmk_use_xelatex: false
-
       - name: Prepare website
         run: |
-          rm -rf public
           mkdir -p public
           cp index.html public/index.html
 
-      - name: Version resume PDF
+      - name: Generate resume PDF
         id: resume
         uses: kumarram27/resume-forge@main
         with:
-          pdf_file: resume.pdf
+          resume_file: resume.md
           output_dir: public
+          template: modern
+          accent_color: '#2563eb'
+          font: inter
+          versioning: 'true'
+          commit_output: 'false'
+
+      - name: Write latest resume manifest
+        env:
+          RESUME_VERSION: ${{ steps.resume.outputs.version }}
+        run: |
+          if [ -z "$RESUME_VERSION" ]; then
+            echo "::error::ResumeForge did not return a versioned PDF filename."
+            exit 1
+          fi
+
+          export RESUME_UPDATED_AT="$(git show -s --format=%cI "$GITHUB_SHA")"
+          python - <<'PY'
+          import json
+          import os
+          from pathlib import Path
+
+          version = os.environ["RESUME_VERSION"]
+          if Path(version).name != version:
+              raise SystemExit("ResumeForge returned an invalid versioned filename.")
+
+          manifest = {
+              "version": version,
+              "file": f"versions/{version}",
+              "updated_at": os.environ["RESUME_UPDATED_AT"],
+          }
+          Path("public/latest.json").write_text(
+              json.dumps(manifest, indent=2) + "\n",
+              encoding="utf-8",
+          )
+          PY
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v5
