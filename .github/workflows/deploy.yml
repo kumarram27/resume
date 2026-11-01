@@ -1,3 +1,4 @@
+
 name: Build and Deploy Resume
 
 on:
@@ -5,9 +6,6 @@ on:
     branches:
       - main
   workflow_dispatch:
-
-permissions:
-  contents: write
 
 concurrency:
   group: resume-deployment
@@ -19,7 +17,7 @@ jobs:
 
     steps:
       - name: Checkout resume repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Compile LaTeX
         uses: xu-cheng/latex-action@v4
@@ -27,121 +25,21 @@ jobs:
           root_file: resume.tex
           latexmk_use_xelatex: false
 
-      - name: Prepare versioned resume
+      - name: Prepare website
         run: |
-          VERSION="$(date -u +%Y%m%d)-$(git rev-parse --short=7 "$GITHUB_SHA")"
-          PDF_NAME="resume-${VERSION}.pdf"
+          rm -rf public
+          mkdir -p public
+          cp index.html public/index.html
 
-          mkdir -p public/versions
-
-          cp resume.pdf "public/versions/${PDF_NAME}"
-
-          UPDATED_AT="$(git show -s --format=%cI "$GITHUB_SHA")"
-
-          cat > public/latest.json <<EOF
-          {
-            "version": "${VERSION}",
-            "file": "versions/${PDF_NAME}",
-            "updated_at": "${UPDATED_AT}"
-          }
-          EOF
-
-          echo "Published version: ${VERSION}"
-          echo "PDF: ${PDF_NAME}"
-
-      - name: Generate resume viewer
-        run: |
-          cat > public/index.html <<'EOF'
-          <!DOCTYPE html>
-          <html lang="en">
-          <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1">
-            <title>Resume | Kumar Satya Sri Ram</title>
-            <style>
-              * { box-sizing: border-box; }
-              body {
-                margin: 0;
-                padding: 20px;
-                background: #111;
-                color: white;
-                font-family: Arial, sans-serif;
-              }
-              header {
-                max-width: 1000px;
-                margin: 0 auto 16px;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                gap: 12px;
-              }
-              a { color: white; }
-              iframe {
-                display: block;
-                width: 100%;
-                max-width: 1000px;
-                height: calc(100vh - 110px);
-                margin: auto;
-                border: 1px solid #444;
-                border-radius: 8px;
-                background: white;
-              }
-            </style>
-          </head>
-          <body>
-            <header>
-              <span>Kumar Satya Sri Ram — Resume</span>
-              <a id="download" href="#" download>Download PDF</a>
-            </header>
-
-            <iframe id="viewer" title="Resume"></iframe>
-
-            <script>
-              async function loadResume() {
-                const response = await fetch(
-                  `latest.json?t=${Date.now()}`,
-                  { cache: "no-store" }
-                );
-
-                if (!response.ok) {
-                  throw new Error("Could not load latest resume");
-                }
-
-                const data = await response.json();
-
-                const pdfUrl =
-                  `${data.file}?v=${encodeURIComponent(data.version)}`;
-
-                document.getElementById("viewer").src = pdfUrl;
-                document.getElementById("download").href = pdfUrl;
-              }
-
-              loadResume().catch(error => {
-                document.body.innerHTML =
-                  "<h2>Unable to load resume. Please try again later.</h2>";
-                console.error(error);
-              });
-            </script>
-          </body>
-          </html>
-          EOF
-
-      - name: Commit generated resume archive
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-          git add public/
-
-          if git diff --cached --quiet; then
-            echo "No generated changes to commit"
-          else
-            git commit -m "chore: publish resume"
-            git push origin HEAD:main
-          fi
+      - name: Version resume PDF
+        id: resume
+        uses: kumarram27/resume-forge@main
+        with:
+          pdf_file: resume.pdf
+          output_dir: public
 
       - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v5
         with:
           path: public
 
@@ -160,4 +58,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
