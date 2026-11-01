@@ -1,5 +1,5 @@
 ---
-name: Boppana Kumar Satya Sri Ram
+name: Kumar Satya Sri Ram Boppana
 title: Software Engineer
 email: kumar27.dev@gmail.com
 phone: "+91 7671869918"
@@ -35,7 +35,7 @@ Software Engineer building event-driven systems, REST APIs, and real-time infras
 ## FlintLab Inc.
 **Software Development Engineer & Founding Engineer (one of the first engineers hired)**
 
-Mar 2025 – Present
+Mar 2025 - Present
 
 - Architected and shipped production Python/FastAPI microservices using Redis Pub/Sub for event-driven communication, powering allocation, automation, logging, and session workflows across 150+ Android and iOS devices.
 - Designed and led the iOS platform implementation, owning device streaming, interaction, recording, and IPA resigning to support remote automation for a fleet of 50+ iOS devices.
@@ -46,7 +46,7 @@ Mar 2025 – Present
 ## FlintLab Inc.
 **Software Development Engineer Intern**
 
-Jan 2025 – Mar 2025
+Jan 2025 - Mar 2025
 
 - Reduced redundant frontend API calls by 30% using state management and Redis caching; contributed to an SPA migration reducing observed routing time from 300 ms to 20 ms.
 - Migrated Next.js data fetching from client-side to server-side execution, improving data-access control and reducing backend interaction exposure in the browser.
@@ -65,6 +65,6 @@ Jan 2025 – Mar 2025
 ## Gayatri Vidya Parishad College of Engineering (GVPCE), Visakhapatnam
 **Bachelor of Technology in Computer Science and Technology**
 
-2021 – 2025
+2021 - 2025
 
 - CGPA: 8/10
